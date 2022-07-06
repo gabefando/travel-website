@@ -28,3 +28,13 @@ document.getElementById("btn").addEventListener("click", function(event) {
 });
 
 inputSearch();
+
+async function fetchCurrencyApi() {
+	const response = await fetch('https://api.currencyfreaks.com/latest?apikey=7ee5ea6285854aa6a43846d578b46cfe&');
+	const currencyData = await response.json();
+	return currencyData;
+}
+
+fetchCurrencyApi().then(currencyData => {
+	console.log(currencyData);
+});
