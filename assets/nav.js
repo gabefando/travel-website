@@ -11,3 +11,4 @@ fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query=new%20york&local
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
+
