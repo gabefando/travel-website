@@ -7,7 +7,7 @@ const destination = document.getElementById("destination");
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'b7490b331amsh9ee31775f059e78p1c16fdjsn2338e338b5b7',
+		'X-RapidAPI-Key': 'c8cf0e0ac6msh2e511bdd7650d44p19674ejsn5c64dddbd8d6',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
