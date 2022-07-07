@@ -1,6 +1,7 @@
 var inputNav = document.getElementById("inputNav");
 var currencies = document.getElementById("currencies");
 const hotelCard = document.getElementById("hotel-card");
+const destination = document.getElementById("destination");
 
 // Hotels API
 const options = {
@@ -15,6 +16,7 @@ function inputSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
         inputNav.innerText = x;
+		destination.innerText = "Hotels in " + x;
 		
 		fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query='+x+'&locale=en_US&currency=USD', options)
 		.then(response => response.json())
@@ -40,12 +42,7 @@ function inputSearch() {
 				
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
-				var hotelAddress = document.createElement("a");
-				hotelAddress.setAttribute("class", "btn btn-primary");
-				hotelAddress.textContent = "See Hotel";
-				var googleMapUrl = "https://www.google.com/maps/place";
 				cardBody.append(hotelRating);
-				cardBody.append(hotelAddress);
 				
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
@@ -53,12 +50,23 @@ function inputSearch() {
 					.then(response => response.json())
 					.then(function(response){
 						console.log(response);
-
+						
 						// create a url to refer google map
+						var hotelAddress = document.createElement("a");
+						hotelAddress.setAttribute("class", "btn btn-primary");
+						hotelAddress.setAttribute("target", "_blank");
+						hotelAddress.textContent = "See Hotel";
+						var googleMapUrl = "https://www.google.com/maps/place/";
+						cardBody.append(hotelAddress);
+
 						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
 						hotelAddress.setAttribute("href", googleMapUrl);
+						var test = document.querySelector(`.test-${i}`)
+						test.append(hotelAddress);
+
+						console.log(googleMapUrl);
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
 							fetch('https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id='+hotelId+'', options)
@@ -69,7 +77,6 @@ function inputSearch() {
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
 									var hotelImg = document.createElement("img");
-									var test = document.querySelector(`.test-${i}`)
 									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
 									test.append(hotelImg);
@@ -78,11 +85,11 @@ function inputSearch() {
 							.catch(err => console.error(err));
 						};
 					fetchImages();
-					console.log(cardDiv);
 					})
 				};
 				fetchDetails();
 				hotelCard.appendChild(cardDiv);
+				console.log(hotelCard);
 			};
 				})
 			};
