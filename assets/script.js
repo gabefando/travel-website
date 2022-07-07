@@ -42,8 +42,8 @@ function inputSearch() {
 				
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
+
 				cardBody.append(hotelRating);
-				
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
 					fetch('https://hotels4.p.rapidapi.com/properties/get-details?id='+destId+'', options)
@@ -62,11 +62,7 @@ function inputSearch() {
 						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
-						hotelAddress.setAttribute("href", googleMapUrl);
-						var test = document.querySelector(`.test-${i}`)
-						test.append(hotelAddress);
-
-						console.log(googleMapUrl);
+						
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
 							fetch('https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id='+hotelId+'', options)
@@ -79,7 +75,12 @@ function inputSearch() {
 									var hotelImg = document.createElement("img");
 									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
+									var hotelAddress = document.createElement("a");
+									hotelAddress.setAttribute("class", `btn btn-primary`);
+									hotelAddress.setAttribute("href", googleMapUrl);
+									hotelAddress.textContent = "See Hotel";
 									test.append(hotelImg);
+									test.append(hotelAddress);
 								}
 							})
 							.catch(err => console.error(err));
