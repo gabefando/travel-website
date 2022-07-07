@@ -43,7 +43,6 @@ function inputSearch() {
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
 
-				var googleMapUrl = "https://www.google.com/maps/place/";
 				cardBody.append(hotelRating);
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
@@ -53,9 +52,17 @@ function inputSearch() {
 						console.log(response);
 
 						// create a url to refer google map
+						var hotelAddress = document.createElement("a");
+						hotelAddress.setAttribute("class", `btn btn-primary`);
+						hotelAddress.setAttribute("target", "_blank");
+						
+						var googleMapUrl = "https://www.google.com/maps/place/";
 						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
+						
+						hotelAddress.setAttribute("href", googleMapUrl);
+						hotelAddress.textContent = "See Hotel";
 						
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
@@ -70,11 +77,6 @@ function inputSearch() {
 									var test = document.querySelector(`.test-${i}`)
 									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
-									var hotelAddress = document.createElement("a");
-									hotelAddress.setAttribute("class", `btn btn-primary`);
-									hotelAddress.setAttribute("target", "_blank");
-									hotelAddress.setAttribute("href", googleMapUrl);
-									hotelAddress.textContent = "See Hotel";
 									test.append(hotelImg);
 									test.append(hotelAddress);
 								}
