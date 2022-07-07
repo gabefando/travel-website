@@ -108,13 +108,25 @@ async function fetchCurrencyApi() {
 
 fetchCurrencyApi().then(currencyData => {
 	console.log(currencyData);
-	var currenciesList = Object.keys(currencyData.rates);
-	console.log(currenciesList.length);
-	for(let i = 0; i < currenciesList.length; i++) {
+	var currenciesList = currencyData.rates
+	var currenciesListObj = Object.keys(currencyData.rates);
+	console.log(currenciesListObj.length);
+	console.log(currenciesList.MXN)
+	for(let i = 0; i < currenciesListObj.length; i++) {
 		console.log("test");
 		var option = document.createElement("option");
-		option.innerText=currenciesList[i];
-		currencies.appendChild(option);
+		option.innerText=currenciesListObj[i];
+		currencies.appendChild(option);	
 	}
-});
+	var convBtn = document.getElementById("convBtn")
 
+	convBtn.addEventListener("click", function(){
+	var rate = currenciesList[currencies.value];
+	var amountConv = document.getElementById("amountConv").value;
+	var to = document.getElementById("to");
+	var result = rate * amountConv;
+	to.innerText = result;
+	console.log(result);
+	console.log(currenciesList[currencies.value])
+})
+});
