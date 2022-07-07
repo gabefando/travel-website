@@ -16,7 +16,7 @@ function inputSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
         inputNav.innerText = x;
-		destination.innerText = "Hotels in " + x;
+		destination.innerText = "Hotels in " + x[0].toUpperCase() + x.substring(1);
 		
 		fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query='+x+'&locale=en_US&currency=USD', options)
 		.then(response => response.json())
@@ -43,6 +43,7 @@ function inputSearch() {
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
 
+				var googleMapUrl = "https://www.google.com/maps/place/";
 				cardBody.append(hotelRating);
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
@@ -50,15 +51,8 @@ function inputSearch() {
 					.then(response => response.json())
 					.then(function(response){
 						console.log(response);
-						
-						// create a url to refer google map
-						var hotelAddress = document.createElement("a");
-						hotelAddress.setAttribute("class", "btn btn-primary");
-						hotelAddress.setAttribute("target", "_blank");
-						hotelAddress.textContent = "See Hotel";
-						var googleMapUrl = "https://www.google.com/maps/place/";
-						cardBody.append(hotelAddress);
 
+						// create a url to refer google map
 						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
@@ -73,10 +67,12 @@ function inputSearch() {
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
 									var hotelImg = document.createElement("img");
+									var test = document.querySelector(`.test-${i}`)
 									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
 									var hotelAddress = document.createElement("a");
 									hotelAddress.setAttribute("class", `btn btn-primary`);
+									hotelAddress.setAttribute("target", "_blank");
 									hotelAddress.setAttribute("href", googleMapUrl);
 									hotelAddress.textContent = "See Hotel";
 									test.append(hotelImg);
