@@ -21,31 +21,25 @@
     <section class="container" id="hotel-container">
         <div class="mt-3">
             <h2>Hotels in [destination]</h2>
-            <div class="row mt-2" id="hotel-card">
-                <!-- <button class="col-1 btn me-2">⬅️</button> -->
-                <div class="card col-1 me-2" style="width: 18rem;">
-                    <div class="card-body" id="card-template">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">See Hotel</a>
-                    </div>
-                </div>
-
-                <div class="card col-1me-2" style="width: 18rem;">
-                    <div class="card-body" id="card-template">
-                    <h5 class="card-title">Card title</h5>
-                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">See Hotel</a>
-                    </div>
-                </div>
-                <!-- <button class="col-1 btn ms-2">➡️</button> -->
-            </div>
+            <div class="row mt-2" id="hotel-card"></div>
         </div>
 
         <div class="mt-3">
             <h2>Currency Conversion Calculator</h2>
-            <div class="">
-                <p>placeholder</p>
+            <div class="input-group mb-3">
+                <label class="input-group-text d-inline" for="USDC">From</label>
+                <select class="form-select d-inline" id="USDC">
+                    <option selected>USD</option>
+                </select>
+                <label class="input-group-text d-inline" for="currencies">To</label>
+                <select class="form-select d-inline" id="currencies">
+                    <option selected>Choose...</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <textarea class="form-control" id="amountConv" placeholder="How much would you like to convert? (Numbers only)"></textarea>
+                <textarea class="form-control" id="to" placeholder="Amount will appear here" readonly></textarea>
+                <button class="btn btn-primary" id="convBtn">Convert</button>
             </div>
         </div>
     </section>

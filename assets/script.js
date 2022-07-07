@@ -1,11 +1,12 @@
 var input = document.getElementById("input");
+var currencies = document.getElementById("currencies");
 const hotelCard = document.getElementById("hotel-card");
 
 // Hotels API
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '6f5f1ad54emsh7c79d8f9d7674cep14c7bbjsnebe2a371671f',
+		'X-RapidAPI-Key': '515713f87cmshd44d83b936c5dcdp1b3a63jsn8f42e98cb281',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
@@ -21,7 +22,6 @@ function inputSearch() {
 			let entities = response.suggestions[1].entities;
 			console.log(entities);
 			for(let i = 0; i < entities.length; i++) {
-<<<<<<< HEAD
 				//create card div element
 				var cardDiv = document.createElement("div");
 				cardDiv.setAttribute("class", "card col-1 me-2");
@@ -37,70 +37,59 @@ function inputSearch() {
 				hotelName.setAttribute("class", "card-body");
 				hotelName.textContent = entities[i].name;
 				cardBody.append(hotelName);
-
-				var hotelImg = document.createElement("img");
-				hotelImg.setAttribute("style", "width: 80%; height: 80%; box-sizing: border-box")
+				
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
 				var hotelAddress = document.createElement("a");
 				hotelAddress.setAttribute("class", "btn btn-primary");
 				hotelAddress.textContent = "See Hotel";
 				var googleMapUrl = "https://www.google.com/maps/place";
+				cardBody.append(hotelRating);
+				cardBody.append(hotelAddress);
 				
-=======
->>>>>>> e28a83b43718155ff442244ef7e5143849970bd2
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
 					fetch('https://hotels4.p.rapidapi.com/properties/get-details?id='+destId+'', options)
 					.then(response => response.json())
 					.then(function(response){
 						console.log(response);
-<<<<<<< HEAD
 
 						// create a url to refer google map
-						var address = response.data.propertyDescription.address.fullAddress;
+						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
 						hotelAddress.setAttribute("href", googleMapUrl);
 
-=======
->>>>>>> e28a83b43718155ff442244ef7e5143849970bd2
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
 							fetch('https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id='+hotelId+'', options)
 							.then(response => response.json())
-<<<<<<< HEAD
 							.then(function(response){
 								console.log(response);
 								if(response.hotelImages[0]){
+									var imgid = `fetch${i}`
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
+									var hotelImg = document.createElement("img");
+									hotelImg.setAttribute("style", "width: 80%; height: 50%; box-sizing: border-box;")
 									hotelImg.setAttribute("src", hotelImagesUrl);
+									cardDiv.setAttribute("id", imgid);
+									var imgiddiv = document.getElementById(imgid)
+									imgiddiv.append(hotelImg);
 								}
 							})
 							.catch(err => console.error(err));
 						};
 					fetchImages();
-					cardBody.append(hotelImg);
-					cardBody.append(hotelAddress);
 					console.log(cardDiv);
 					})
 				};
-			fetchDetails();
-			hotelCard.appendChild(cardDiv);
-=======
-							.then(response => console.log(response))
-							.catch(err => console.error(err));
+				fetchDetails();
+				hotelCard.appendChild(cardDiv);
 						};
-					fetchImages();
 					})
 				};
-			fetchDetails();
->>>>>>> e28a83b43718155ff442244ef7e5143849970bd2
-			};
-		});		
-    }
-};
+		};
 
 // use add event listener so that when button is clicked, the js is updated
 document.getElementById("btn").addEventListener("click", function(event) {
@@ -110,3 +99,34 @@ document.getElementById("btn").addEventListener("click", function(event) {
 });
 
 inputSearch();
+
+async function fetchCurrencyApi() {
+	const response = await fetch('https://api.currencyfreaks.com/latest?apikey=7ee5ea6285854aa6a43846d578b46cfe&');
+	const currencyData = await response.json();
+	return currencyData;
+}
+
+fetchCurrencyApi().then(currencyData => {
+	console.log(currencyData);
+	var currenciesList = currencyData.rates
+	var currenciesListObj = Object.keys(currencyData.rates);
+	console.log(currenciesListObj.length);
+	console.log(currenciesList.MXN)
+	for(let i = 0; i < currenciesListObj.length; i++) {
+		console.log("test");
+		var option = document.createElement("option");
+		option.innerText=currenciesListObj[i];
+		currencies.appendChild(option);	
+	}
+	var convBtn = document.getElementById("convBtn")
+
+	convBtn.addEventListener("click", function(){
+	var rate = currenciesList[currencies.value];
+	var amountConv = document.getElementById("amountConv").value;
+	var to = document.getElementById("to");
+	var result = rate * amountConv;
+	to.innerText = result;
+	console.log(result);
+	console.log(currenciesList[currencies.value])
+})
+});
