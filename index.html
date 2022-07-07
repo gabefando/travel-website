@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>TRAVEL SITE </title>
+
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+
+    <title>Troogle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-   
 </head>
 <body class="backgroundimage">
-    <div class="container">
-    </div>
         <div class="row container-fluid justify-content-center position-absolute top-50 start-50 translate-middle">
+            <h1 class="text-center text-light" style="font-family: 'Koulen', cursive;">Troogle.</h1>
             <div class="col-6">
                 <input class="form-control" id="inputIndex" list='datalistOptions' placeholder="Where would you like to travel?">
                   
@@ -25,15 +28,10 @@
                 <a href="nav.html"><button class="btn btn-primary" id="btnIndex">Search</button></a>
             </div>
             <datalist id="datalistOptions">
-                <option value="Paris">
-                <option value="Japan">
-                <option value="New York">
-                <option value="Israel">
-                <option value="Korea">
-             </datalist>
-        </div>
-
-        <script src="./assets/index.js"></script>
+                <option id="optionIndex"></option>
+            </datalist>
+        </div> 
+    <script src="./assets/index.js"></script>
 </body>
 </html>
   
