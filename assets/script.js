@@ -1,6 +1,7 @@
 var inputNav = document.getElementById("inputNav");
 var currencies = document.getElementById("currencies");
 const hotelCard = document.getElementById("hotel-card");
+const destination = document.getElementById("destination");
 
 // Hotels API
 const options = {
@@ -15,6 +16,7 @@ function inputSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
         inputNav.innerText = x;
+		destination.innerText = "Hotels in " + x[0].toUpperCase() + x.substring(1);
 		
 		fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query='+x+'&locale=en_US&currency=USD', options)
 		.then(response => response.json())
@@ -70,6 +72,7 @@ function inputSearch() {
 									hotelImg.setAttribute("src", hotelImagesUrl);
 									var hotelAddress = document.createElement("a");
 									hotelAddress.setAttribute("class", `btn btn-primary`);
+									hotelAddress.setAttribute("target", "_blank");
 									hotelAddress.setAttribute("href", googleMapUrl);
 									hotelAddress.textContent = "See Hotel";
 									test.append(hotelImg);
@@ -79,14 +82,14 @@ function inputSearch() {
 							.catch(err => console.error(err));
 						};
 					fetchImages();
-					console.log(cardDiv);
 					})
 				};
 				fetchDetails();
 				hotelCard.appendChild(cardDiv);
-						};
-					})
-				};
+				console.log(hotelCard);
+			};
+				})
+			};
 		};
 
 // use add event listener so that when button is clicked, the js is updated
