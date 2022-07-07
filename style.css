@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.backgroundimage{
+    width: 100%;
+    min-height: 100vh;
+    padding: 5%;
+    background-image: url("./images/background.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
