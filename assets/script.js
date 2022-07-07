@@ -24,7 +24,7 @@ function inputSearch() {
 			for(let i = 0; i < entities.length; i++) {
 				//create card div element
 				var cardDiv = document.createElement("div");
-				cardDiv.setAttribute("class", "card col-1 me-2");
+				cardDiv.setAttribute("class", "card col-1 me-2 test");
 				cardDiv.setAttribute("style", "width: 18rem;");
 				
 				//create inside div element
@@ -67,15 +67,12 @@ function inputSearch() {
 							.then(function(response){
 								console.log(response);
 								if(response.hotelImages[0]){
-									var imgid = `fetch${i}`
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
 									var hotelImg = document.createElement("img");
-									hotelImg.setAttribute("style", "width: 80%; height: 50%; box-sizing: border-box;")
+									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
-									cardDiv.setAttribute("id", imgid);
-									var imgiddiv = document.getElementById(imgid)
-									imgiddiv.append(hotelImg);
+									cardDiv.append(hotelImg);
 								}
 							})
 							.catch(err => console.error(err));
