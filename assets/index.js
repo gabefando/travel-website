@@ -1,9 +1,10 @@
 var inputIndex = document.getElementById("inputIndex");
+var optionIndex = document.getElementById("optionIndex");
 
 function initialSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
-        inputNav.innerText = x;
+		optionIndex.innerText = x;
 	};
 };
 
@@ -12,3 +13,5 @@ document.getElementById("btnIndex").addEventListener("click", function(event) {
 	localStorage.setItem("search", inputIndex.value);
 	initialSearch();
 });
+
+value="'+month[i]+'"
