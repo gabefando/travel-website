@@ -14,13 +14,24 @@
         <div class="row container-fluid justify-content-center position-absolute top-50 start-50 translate-middle">
             <div class="col-6">
                 <input class="form-control" list='datalistOptions' placeholder="Where would you like to travel?">
+                  
             </div>
             <div class="col-1">
                 <a href="nav.html"><button class="btn btn-primary" id="btn">Search</button></a>
             </div>
         </div> 
+        <form action="/action_page.php" method="get">
 
-        <script src="./assets/nav.js"></script>
+            
+            <datalist id="datalistOptions">
+              <option value="Paris">
+              <option value="Japan">
+              <option value="New York">
+              <option value="Israel">
+              <option value="Korea">
+            </datalist>
+          </form>
+          
 </body>
 </html>
   
