@@ -1,12 +1,13 @@
-var input = document.getElementById("input");
+var inputNav = document.getElementById("inputNav");
 var currencies = document.getElementById("currencies");
 const hotelCard = document.getElementById("hotel-card");
+const destination = document.getElementById("destination");
 
 // Hotels API
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '515713f87cmshd44d83b936c5dcdp1b3a63jsn8f42e98cb281',
+		'X-RapidAPI-Key': 'b7490b331amsh9ee31775f059e78p1c16fdjsn2338e338b5b7',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
@@ -14,7 +15,8 @@ const options = {
 function inputSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
-        input.innerText = x;
+        inputNav.innerText = x;
+		destination.innerText = "Hotels in " + x[0].toUpperCase() + x.substring(1);
 		
 		fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query='+x+'&locale=en_US&currency=USD', options)
 		.then(response => response.json())
@@ -24,7 +26,7 @@ function inputSearch() {
 			for(let i = 0; i < entities.length; i++) {
 				//create card div element
 				var cardDiv = document.createElement("div");
-				cardDiv.setAttribute("class", "card col-1 me-2");
+				cardDiv.setAttribute("class", `card col-1 me-2 test-${i}`);
 				cardDiv.setAttribute("style", "width: 18rem;");
 				
 				//create inside div element
@@ -40,13 +42,9 @@ function inputSearch() {
 				
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
-				var hotelAddress = document.createElement("a");
-				hotelAddress.setAttribute("class", "btn btn-primary");
-				hotelAddress.textContent = "See Hotel";
-				var googleMapUrl = "https://www.google.com/maps/place";
+
+				var googleMapUrl = "https://www.google.com/maps/place/";
 				cardBody.append(hotelRating);
-				cardBody.append(hotelAddress);
-				
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
 					fetch('https://hotels4.p.rapidapi.com/properties/get-details?id='+destId+'', options)
@@ -58,8 +56,7 @@ function inputSearch() {
 						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
-						hotelAddress.setAttribute("href", googleMapUrl);
-
+						
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
 							fetch('https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id='+hotelId+'', options)
@@ -67,34 +64,38 @@ function inputSearch() {
 							.then(function(response){
 								console.log(response);
 								if(response.hotelImages[0]){
-									var imgid = `fetch${i}`
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
 									var hotelImg = document.createElement("img");
-									hotelImg.setAttribute("style", "width: 80%; height: 50%; box-sizing: border-box;")
+									var test = document.querySelector(`.test-${i}`)
+									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
-									cardDiv.setAttribute("id", imgid);
-									var imgiddiv = document.getElementById(imgid)
-									imgiddiv.append(hotelImg);
+									var hotelAddress = document.createElement("a");
+									hotelAddress.setAttribute("class", `btn btn-primary`);
+									hotelAddress.setAttribute("target", "_blank");
+									hotelAddress.setAttribute("href", googleMapUrl);
+									hotelAddress.textContent = "See Hotel";
+									test.append(hotelImg);
+									test.append(hotelAddress);
 								}
 							})
 							.catch(err => console.error(err));
 						};
 					fetchImages();
-					console.log(cardDiv);
 					})
 				};
 				fetchDetails();
 				hotelCard.appendChild(cardDiv);
-						};
-					})
-				};
+				console.log(hotelCard);
+			};
+				})
+			};
 		};
 
 // use add event listener so that when button is clicked, the js is updated
-document.getElementById("btn").addEventListener("click", function(event) {
+document.getElementById("btnNav").addEventListener("click", function(event) {
 	event.preventDefault;
-	localStorage.setItem("search", input.value);
+	localStorage.setItem("search", inputNav.value);
 	inputSearch();
 });
 
@@ -110,6 +111,7 @@ fetchCurrencyApi().then(currencyData => {
 	console.log(currencyData);
 	var currenciesList = currencyData.rates
 	var currenciesListObj = Object.keys(currencyData.rates);
+	currenciesListObj.sort();
 	console.log(currenciesListObj.length);
 	console.log(currenciesList.MXN)
 	for(let i = 0; i < currenciesListObj.length; i++) {
