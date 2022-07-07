@@ -1,4 +1,4 @@
-var input = document.getElementById("input");
+var inputNav = document.getElementById("inputNav");
 var currencies = document.getElementById("currencies");
 const hotelCard = document.getElementById("hotel-card");
 
@@ -6,7 +6,7 @@ const hotelCard = document.getElementById("hotel-card");
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '515713f87cmshd44d83b936c5dcdp1b3a63jsn8f42e98cb281',
+		'X-RapidAPI-Key': 'b7490b331amsh9ee31775f059e78p1c16fdjsn2338e338b5b7',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
@@ -14,7 +14,7 @@ const options = {
 function inputSearch() {
 	if (localStorage.getItem("search")) {
         let x = localStorage.getItem("search");
-        input.innerText = x;
+        inputNav.innerText = x;
 		
 		fetch('https://hotels4.p.rapidapi.com/locations/v2/search?query='+x+'&locale=en_US&currency=USD', options)
 		.then(response => response.json())
@@ -89,9 +89,9 @@ function inputSearch() {
 		};
 
 // use add event listener so that when button is clicked, the js is updated
-document.getElementById("btn").addEventListener("click", function(event) {
+document.getElementById("btnNav").addEventListener("click", function(event) {
 	event.preventDefault;
-	localStorage.setItem("search", input.value);
+	localStorage.setItem("search", inputNav.value);
 	inputSearch();
 });
 
