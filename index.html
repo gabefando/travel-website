@@ -11,30 +11,18 @@
     rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <!-- <style>
-        #intro {
-          background-image: url("https://mdbootstrap.com/img/new/fluid/city/018.jpg");
-          height: 100vh;
-        }
-  
-        /* Height for devices larger than 576px */
-        @media (min-width: 992px) {
-          #intro {
-            margin-top: -58.59px;
-          }
-        }
-  </style> -->
+   
 </head>
 <body class="backgroundimage">
     <div class="container">
     </div>
         <div class="row container-fluid justify-content-center position-absolute top-50 start-50 translate-middle">
             <div class="col-6">
-                <input class="form-control" list='datalistOptions' placeholder="Where would you like to travel?">
+                <input class="form-control" id="inputIndex" list='datalistOptions' placeholder="Where would you like to travel?">
                   
             </div>
             <div class="col-1">
-                <a href="nav.html"><button class="btn btn-primary" id="btn">Search</button></a>
+                <a href="nav.html"><button class="btn btn-primary" id="btnIndex">Search</button></a>
             </div>
             <datalist id="datalistOptions">
                 <option value="Paris">
@@ -42,12 +30,10 @@
                 <option value="New York">
                 <option value="Israel">
                 <option value="Korea">
-              </datalist>
-        </div> 
-        <form action="/action_page.php" method="get">
+             </datalist>
+        </div>
 
-        </form> 
-
-    </body>
+        <script src="./assets/index.js"></script>
+</body>
 </html>
   
