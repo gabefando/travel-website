@@ -45,8 +45,20 @@
 
         <div class="mt-3">
             <h2>Currency Conversion Calculator</h2>
-            <div class="">
-                <p>placeholder</p>
+            <div class="input-group mb-3">
+                <label class="input-group-text d-inline" for="USDC">From</label>
+                <select class="form-select d-inline" id="USDC">
+                    <option selected>USD</option>
+                </select>
+                <label class="input-group-text d-inline" for="currencies">To</label>
+                <select class="form-select d-inline" id="currencies">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <textarea class="form-control" placeholder="How much would you like to convert? (Numbers only)"></textarea>
+                <textarea class="form-control" placeholder="Amount will appear here" readonly></textarea>
             </div>
         </div>
     </section>

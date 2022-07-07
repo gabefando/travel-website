@@ -1,4 +1,5 @@
 var input = document.getElementById("input");
+var currencies = document.getElementById("currencies");
 
 // Hotels API
 const options = {
@@ -59,4 +60,13 @@ async function fetchCurrencyApi() {
 
 fetchCurrencyApi().then(currencyData => {
 	console.log(currencyData);
+	var currenciesList = Object.keys(currencyData.rates);
+	console.log(currenciesList.length);
+	for(let i = 0; i < currenciesList.length; i++) {
+		console.log("test");
+		var option = document.createElement("option");
+		option.innerText=currenciesList[i];
+		currencies.appendChild(option);
+	}
 });
+
