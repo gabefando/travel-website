@@ -6,7 +6,7 @@ const hotelCard = document.getElementById("hotel-card");
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '515713f87cmshd44d83b936c5dcdp1b3a63jsn8f42e98cb281',
+		'X-RapidAPI-Key': 'b7490b331amsh9ee31775f059e78p1c16fdjsn2338e338b5b7',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
