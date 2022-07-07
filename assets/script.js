@@ -110,6 +110,7 @@ fetchCurrencyApi().then(currencyData => {
 	console.log(currencyData);
 	var currenciesList = currencyData.rates
 	var currenciesListObj = Object.keys(currencyData.rates);
+	currenciesListObj.sort();
 	console.log(currenciesListObj.length);
 	console.log(currenciesList.MXN)
 	for(let i = 0; i < currenciesListObj.length; i++) {
