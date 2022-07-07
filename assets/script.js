@@ -6,7 +6,7 @@ const hotelCard = document.getElementById("hotel-card");
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '6f5f1ad54emsh7c79d8f9d7674cep14c7bbjsnebe2a371671f',
+		'X-RapidAPI-Key': '515713f87cmshd44d83b936c5dcdp1b3a63jsn8f42e98cb281',
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
@@ -37,15 +37,15 @@ function inputSearch() {
 				hotelName.setAttribute("class", "card-body");
 				hotelName.textContent = entities[i].name;
 				cardBody.append(hotelName);
-
-				var hotelImg = document.createElement("img");
-				hotelImg.setAttribute("style", "width: 80%; height: 80%; box-sizing: border-box")
+				
 				var hotelRating = document.createElement("p");
 				hotelRating.setAttribute("class", "card-text");
 				var hotelAddress = document.createElement("a");
 				hotelAddress.setAttribute("class", "btn btn-primary");
 				hotelAddress.textContent = "See Hotel";
 				var googleMapUrl = "https://www.google.com/maps/place";
+				cardBody.append(hotelRating);
+				cardBody.append(hotelAddress);
 				
 				var destId = entities[i].destinationId;
 				function fetchDetails() {
@@ -55,7 +55,7 @@ function inputSearch() {
 						console.log(response);
 
 						// create a url to refer google map
-						var address = response.data.propertyDescription.address.fullAddress;
+						var address = response.data.body.propertyDescription.address.fullAddress;
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
 						hotelAddress.setAttribute("href", googleMapUrl);
@@ -67,29 +67,29 @@ function inputSearch() {
 							.then(function(response){
 								console.log(response);
 								if(response.hotelImages[0]){
+									var imgid = `fetch${i}`
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
+									var hotelImg = document.createElement("img");
+									hotelImg.setAttribute("style", "width: 80%; height: 50%; box-sizing: border-box;")
 									hotelImg.setAttribute("src", hotelImagesUrl);
+									cardDiv.setAttribute("id", imgid);
+									var imgiddiv = document.getElementById(imgid)
+									imgiddiv.append(hotelImg);
 								}
 							})
 							.catch(err => console.error(err));
 						};
 					fetchImages();
-					cardBody.append(hotelImg);
-					cardBody.append(hotelAddress);
 					console.log(cardDiv);
 					})
 				};
-			fetchDetails();
-			hotelCard.appendChild(cardDiv)
-							.then(response => console.log(response))
-							.catch(err => console.error(err));
+				fetchDetails();
+				hotelCard.appendChild(cardDiv);
 						};
-					fetchImages();
 					})
 				};
-			fetchDetails();
-			};
+		};
 
 // use add event listener so that when button is clicked, the js is updated
 document.getElementById("btn").addEventListener("click", function(event) {
