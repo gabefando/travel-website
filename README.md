@@ -9,7 +9,9 @@ Troogle uses a free API from rapidapi.com called [Hotels API](https://rapidapi.c
 Troogle also uses a free API from [CurrencyFreaks](https://currencyfreaks.com/documentation.html#Authorization). This currency exchange rate API offers the user the ability to convert USD into any global currency.
 
 ## Screenshots
-INSERT SCREENSHOT!!!!!!!!!!!!!!!!
+![Troogle Index Page](./images/Troogle_Index.png)
+
+![Troogle Nav Page](./images/Troogle_Nav.png)
 
 ## Deployed Application
-[Travel Website](__INSERT LINK__)
+[Troogle](https://gabefando.github.io/travel-website/)
