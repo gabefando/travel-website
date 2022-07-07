@@ -24,7 +24,7 @@ function inputSearch() {
 			for(let i = 0; i < entities.length; i++) {
 				//create card div element
 				var cardDiv = document.createElement("div");
-				cardDiv.setAttribute("class", "card col-1 me-2");
+				cardDiv.setAttribute("class", `card col-1 me-2 test-${i}`);
 				cardDiv.setAttribute("style", "width: 18rem;");
 				
 				//create inside div element
@@ -59,7 +59,6 @@ function inputSearch() {
 						var addressArray = address.split(" ");
 						googleMapUrl = googleMapUrl + addressArray.join("+");
 						hotelAddress.setAttribute("href", googleMapUrl);
-
 						var hotelId = response.data.body.pdpHeader.hotelId;
 						function fetchImages() {
 							fetch('https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id='+hotelId+'', options)
@@ -67,15 +66,13 @@ function inputSearch() {
 							.then(function(response){
 								console.log(response);
 								if(response.hotelImages[0]){
-									var imgid = `fetch${i}`
 									var urlArray = response.hotelImages[0].baseUrl.split("_{size}");
 									var hotelImagesUrl = urlArray.join("");
 									var hotelImg = document.createElement("img");
-									hotelImg.setAttribute("style", "width: 80%; height: 50%; box-sizing: border-box;")
+									var test = document.querySelector(`.test-${i}`)
+									hotelImg.setAttribute("class", "rounded")
 									hotelImg.setAttribute("src", hotelImagesUrl);
-									cardDiv.setAttribute("id", imgid);
-									var imgiddiv = document.getElementById(imgid)
-									imgiddiv.append(hotelImg);
+									test.append(hotelImg);
 								}
 							})
 							.catch(err => console.error(err));
